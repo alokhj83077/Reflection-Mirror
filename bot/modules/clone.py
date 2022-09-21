@@ -96,7 +96,7 @@ def _clone(message, bot, multi=0):
     args = message.text.split()
     reply_to = message.reply_to_message
     link = ''
-    slmsg = f"Added by: {tag} \n👥 User ID: <code>{user_id}</code>\n\n"
+    slmsg = f"Adder: {tag} <code>{user_id}</code>\n\n"
     if LINK_LOGS:
             try:
                 source_link = message_args[1]
@@ -198,7 +198,7 @@ def _clone(message, bot, multi=0):
                     update_all_messages()
             except IndexError:
                 pass
-        cc = f'\n<b>╰👤 cc: </b>{tag}\n\n'
+        cc = f'\n<b>cc: </b>{tag}\n\n'
         if button in ["cancelled", ""]:
             sendMessage(f"{tag} {result}", bot, message)
         else:
