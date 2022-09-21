@@ -227,7 +227,7 @@ class MirrorLeechListener:
         mesg = self.message.text.split('\n')
         message_args = mesg[0].split(' ', maxsplit=1)
         reply_to = self.message.reply_to_message
-        slmsg = f"Added by: {self.tag} \n👥 User ID: <code>{self.user_id}</code>\n\n"
+        slmsg = f"Adder: {self.tag} <code>{self.user_id}</code>\n\n"
         if LINK_LOGS:
             try:
                 source_link = message_args[1]
@@ -252,17 +252,17 @@ class MirrorLeechListener:
             if self.message.chat.type == 'private':
                 warnmsg = ''
             else:
-                warnmsg = f'<b>𝙏𝙝𝙞𝙨 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙬𝙞𝙡𝙡 𝙗𝙚 𝙙𝙚𝙡𝙚𝙩𝙚𝙙 𝙞𝙣  <i>{auto_delete_message} minutes</i> 𝙛𝙧𝙤𝙢 𝙩𝙝𝙞𝙨 𝙜𝙧𝙤𝙪𝙥.</b>\n'
+                warnmsg = f'<b>This Message will be deleted in <i>{auto_delete_message} minutes</i> From This Group.</b>\n'
         else:
             warnmsg = ''
         if BOT_PM and self.message.chat.type != 'private':
-            pmwarn = f"<b>𝙄'𝙫𝙚 𝙎𝙚𝙣𝙙 𝙩𝙝𝙚 𝙁𝙞𝙡𝙚𝙨 𝙏𝙤 𝙔𝙤𝙪𝙧 𝙋𝙈 & 𝙇𝙤𝙜 𝘾𝙝𝙖𝙣𝙣𝙚𝙡.</b>\n"
+            pmwarn = f"<b>I've send the Files To Your PM.</b>\n"
         elif self.message.chat.type == 'private':
             pmwarn = ''
         else:
             pmwarn = ''
         if MIRROR_LOGS and self.message.chat.type != 'private':
-            logwarn = f"<b>𝙄'𝙫𝙚 𝙎𝙚𝙣𝙙 𝙩𝙝𝙚 𝙁𝙞𝙡𝙚𝙨 𝙏𝙤 𝙔𝙤𝙪𝙧 𝙋𝙈 & 𝙇𝙤𝙜 𝘾𝙝𝙖𝙣𝙣𝙚𝙡 </b>\n"
+            logwarn = f"<b>>I've send the Files To Your PM </b>\n"
         elif self.message.chat.type == 'private':
             logwarn = ''
         else:
@@ -283,14 +283,15 @@ class MirrorLeechListener:
             file_ = f"{PRENAME_X}"+ file_.strip('-').strip('_')
         else:
           file_ = f"{PRENAME_X} {file_}"
-        lmsg = f"𝗡𝗮𝗺𝗲: <code>{file_}</code>\n\n𝗦𝗶𝘇𝗲: {size}"
+        lmsg = f"Name: <code>{file_}</code>\n\n"
+        msg = f"Size: {size}\n\n"
         if self.isLeech:
-            msg = f'\n𝗧𝗼𝘁𝗮𝗹 𝗙𝗶𝗹𝗲𝘀: {folders}'
+            msg = f'\nTotal File: {folders}\n\n'
             if typ != 0:
-                msg += f'\n𝗖𝗼𝗿𝗿𝘂𝗽𝘁𝗲𝗱 𝗙𝗶𝗹𝗲𝘀: {typ}'
-            msg += f'\n𝗥𝗲𝗾𝘂𝗲𝘀𝘁𝗲𝗱 𝗕𝗬: {self.tag}\n\n'
-            msg += f"𝗧𝗶𝗺𝗲 𝗘𝗹𝗮𝗽𝘀𝗲𝗱: <code>{get_readable_time(time() - self.message.date.timestamp())}</code>\n\n"
-            # msg += f"𝙄'𝙫𝙚 𝙎𝙚𝙣𝙙 𝙩𝙝𝙚 𝙁𝙞𝙡𝙚𝙨 𝙏𝙤 𝙔𝙤𝙪𝙧 𝙋𝙈 & 𝙇𝙤𝙜 𝘾𝙝𝙖𝙣𝙣𝙚𝙡.\n"
+                msg += f'\nCorropted File: {typ}\n\n'
+            msg += f'\ncc: {self.tag}\n\n'
+            msg += f"Elepsed: <code>{get_readable_time(time() - self.message.date.timestamp())}</code>\n\n"
+            # msg += f">I've send the Files To Your PM.<.\n"
             if LEECH_LOG:
                 for i in LEECH_LOG:
                     indexmsg = ''
@@ -312,7 +313,7 @@ class MirrorLeechListener:
                 bot_d = bot.get_me()	
                 b_uname = bot_d.username	
                 botstart = f"{LOG_CHAT_URL}"	
-                buttons.buildbutton("𝙅𝙤𝙞𝙣 𝙇𝙤𝙜𝙨 𝘾𝙝𝙖𝙣𝙣𝙚𝙡", f"{botstart}")
+                buttons.buildbutton("Join Channel", f"{botstart}")
             if not files:
                 uploadmsg = sendMessage(msg, self.bot, self.message)
             else:
@@ -331,14 +332,14 @@ class MirrorLeechListener:
                     clean_target(self.newDir)
                 return		   
         else:
-            msg = f"𝗡𝗮𝗺𝗲: <code>{escape(name)}</code>\n\n𝗦𝗶𝘇𝗲: {size}"
-            msg += f'\n\n𝗧𝘆𝗽𝗲: {typ}'
+            msg = f"Name: <code>{escape(name)}</code>\n\nSize: {size}"
+            msg += f'\n\nType: {typ}'
             if ospath.isdir(f'{DOWNLOAD_DIR}{self.uid}/{name}'):
-                msg += f'\n𝗦𝘂𝗯𝗙𝗼𝗹𝗱𝗲𝗿𝘀: {folders}'
-                msg += f'\n𝗙𝗶𝗹𝗲𝘀: {files}'
-            msg += f'\n\n𝗥𝗲𝗾𝘂𝗲𝘀𝘁𝗲𝗱 𝗕𝗬: {self.tag}\n'
-            msg += f"𝗧𝗶𝗺𝗲 𝗘𝗹𝗮𝗽𝘀𝗲𝗱: <code>{get_readable_time(time() - self.message.date.timestamp())}</code>\n"
-            fwdpm = f"\n\n𝙄'𝙫𝙚 𝙎𝙚𝙣𝙙 𝙩𝙝𝙚 𝙇𝙞𝙣𝙠𝙨 𝙏𝙤 𝙔𝙤𝙪𝙧 𝙋𝙈 & 𝙇𝙤𝙜 𝘾𝙝𝙖𝙣𝙣𝙚𝙡"
+                msg += f'\nSubfolder: {folders}'
+                msg += f'\nFiles: {files}\n\n'
+            msg += f'\n\n cc: {self.tag}\n'
+            msg += f"Elapsed: <code>{get_readable_time(time() - self.message.date.timestamp())}</code>\n\n"
+            fwdpm = f"\n\n I've send the Files To Your PM "
             buttons = ButtonMaker()
             link = short_url(link)
             buttons.buildbutton("☁️ Drive Link", link)
@@ -401,7 +402,7 @@ class MirrorLeechListener:
                 pass
             logmsg = sendLog(msg, self.bot, self.message, InlineKeyboardMarkup(buttons.build_menu(2)))
             if logmsg:
-                log_m = f"\n<b>𝙇𝙞𝙣𝙠 𝙐𝙥𝙡𝙤𝙖𝙙𝙚𝙙, 𝘾𝙡𝙞𝙘𝙠 𝘽𝙚𝙡𝙤𝙬 𝘽𝙪𝙩𝙩𝙤𝙣 𝙏𝙤 𝙎𝙚𝙚 𝙁𝙞𝙡𝙚𝙨</b>"
+                log_m = f"\n<b> Link Uploaded Join The Group </b>"
             else:
                 pass
             sendMarkup(msg + log_m + fwdpm, self.bot, self.message, InlineKeyboardMarkup([[InlineKeyboardButton(text="𝙂𝙚𝙩 𝙔𝙤𝙪𝙧 𝙁𝙞𝙡𝙚𝙨", url=logmsg.link)]]))
