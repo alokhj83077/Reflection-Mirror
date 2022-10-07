@@ -226,7 +226,7 @@ def get_readable_message():
                 msg += f"\n<b>Engine :</b> {download.eng()}"
                 msg += f"\n<b>Size: </b>{download.size()}"
                 #msg += f"\n<b>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</b>"
-            msg += f"\n<b>╰Cancel: </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"
+            msg += f"\n<b>Stop: </b><code>/{BotCommands.CancelMirror} {download.gid()}</code>"
             msg += f"\n<b>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬</b>"
             msg += "\n\n"
             if STATUS_LIMIT is not None and index == STATUS_LIMIT:
